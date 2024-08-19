@@ -6,6 +6,10 @@ fi
 export ZSH="$HOME/.oh-my-zsh"
 export EDITOR=nvim
 
+if [[ -f "/opt/homebrew/bin/brew" ]] then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 plugins=(git zsh-syntax-highlighting zsh-completions zsh-autosuggestions fzf-tab sudo flutter vi-mode)
