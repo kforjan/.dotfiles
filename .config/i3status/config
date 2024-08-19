@@ -1,0 +1,83 @@
+general {
+	colors = true
+	interval = 1
+	color_good = "#31748f"
+	color_degraded = "#f6c177"
+	color_bad = "#eb6f92"
+}
+
+order+= "volume master"
+order += "disk /"
+order += "disk /home"
+order += "wireless _first_"
+order += "ethernet _first_"
+order += "battery all"
+order += "cpu_temperature 0"
+order += "load"
+order += "time"
+
+volume master {
+	device = "default"
+	mixer = "Master"
+	mixer_idx = 0
+	format = "♪: %volume "
+	format_muted = "🔇 "
+}
+
+wireless _first_ {
+	format_up = "  %quality » %essid "
+	format_down = ""
+}
+
+ethernet _first_ {
+	format_up = "🔌 %ip"
+	format_down = ""
+}
+
+battery all {
+	format = "%status %percentage %remaining"
+
+	status_chr = " "
+	status_bat = " "
+        status_unk = " "
+        status_full = " "
+	
+	low_threshold = 11
+	threshold_type = percentage
+	integer_battery_capacity = true
+	last_full_capacity = true
+	hide_seconds = true
+}
+
+time {
+	format = " %d-%m-%Y %H:%M:%S"
+}
+
+load {
+	format = " %1min"
+}
+
+disk "/" {
+	format = " / %avail"
+	prefix_type	= custom
+	low_threshold = 10
+	threshold_type = percentage_avail
+}
+
+disk "/home" {
+   format = " /home %avail"
+   prefix_type = custom
+   low_threshold = 20
+   threshold_type = percentage_avail
+}
+
+cpu_temperature 0 {
+	format = "%degrees°C"
+}
+
+run_watch proxy {
+	pidfile = "/tmp/proxy.pid"
+	format="⬤"
+	format_down="⬤"
+	color_good = "#4E9A06"
+}
