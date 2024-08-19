@@ -12,10 +12,19 @@ fi
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-plugins=(git zsh-syntax-highlighting zsh-completions zsh-autosuggestions fzf-tab sudo flutter vi-mode)
+plugins=(
+  git
+  zsh-syntax-highlighting
+  zsh-completions
+  zsh-autosuggestions
+  fzf-tab
+  sudo 
+  flutter 
+  vi-mode 
+  command-not-found
+)
 
 source $ZSH/oh-my-zsh.sh
-source /etc/zsh_command_not_found
 
 autoload -U compinit && compinit
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
