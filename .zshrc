@@ -44,7 +44,7 @@ alias fg='dart run build_runner build --delete-conflicting-outputs'
 alias fgw='dart run build_runner watch --delete-conflicting-outputs'
 alias cat='bat'
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(fzf --zsh)"
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
