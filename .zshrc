@@ -5,6 +5,8 @@ fi
 
 export ZSH="$HOME/.oh-my-zsh"
 export EDITOR=nvim
+export PATH="$PATH":"$HOME/.pub-cache/bin"
+export PATH="$PATH":"$HOME/.local/scripts/"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
@@ -14,9 +16,9 @@ plugins=(
   zsh-completions
   zsh-autosuggestions
   fzf-tab
-  sudo 
-  flutter 
-  vi-mode 
+  sudo
+  flutter
+  vi-mode
   command-not-found
 )
 
@@ -28,6 +30,7 @@ autoload -U compinit && compinit
 bindkey '^f' autosuggest-accept
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
+bindkey -s '^[t' "tmux-sessionizer\n"
 
 HISTSIZE=5000
 HISTFILE=~/.zsh_history
@@ -57,3 +60,4 @@ alias cat='bat'
 
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(fzf --zsh)"
+export PATH=$PATH:/usr/local/go/bin
