@@ -50,14 +50,20 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
-alias vim='nvim'
+
+alias vim='~/bin/nvim-linux-x86_64.appimage'
+alias nvim='~/bin/nvim-linux-x86_64.appimage'
 alias c='clear'
 alias fg='dart run build_runner build --delete-conflicting-outputs'
 alias fgw='dart run build_runner watch --delete-conflicting-outputs'
 alias cat='bat'
+alias air='~/go/bin/air'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(fzf --zsh)"
 export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:$HOME/go/bin
+export TERMINAL=/snap/bin/alacritty
+export PATH="$HOME/Development/Flutter/bin/flutter/bin:$PATH"
