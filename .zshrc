@@ -7,6 +7,7 @@ export ZSH="$HOME/.oh-my-zsh"
 export EDITOR=nvim
 export PATH="$PATH":"$HOME/.pub-cache/bin"
 export PATH="$PATH":"$HOME/.local/scripts/"
+export PATH="$PATH":"$HOME/.local/bin/"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
@@ -20,9 +21,11 @@ plugins=(
   flutter
   vi-mode
   command-not-found
+  asdf
 )
 
 source $ZSH/oh-my-zsh.sh
+source /usr/share/doc/pkgfile/command-not-found.zsh
 
 autoload -U compinit && compinit
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -51,13 +54,13 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 
-alias vim='~/bin/nvim-linux-x86_64.appimage'
-alias nvim='~/bin/nvim-linux-x86_64.appimage'
+alias vim='nvim'
 alias c='clear'
 alias fg='dart run build_runner build --delete-conflicting-outputs'
 alias fgw='dart run build_runner watch --delete-conflicting-outputs'
 alias cat='bat'
 alias air='~/go/bin/air'
+alias studio='studio &'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -66,4 +69,15 @@ eval "$(fzf --zsh)"
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
 export TERMINAL=/snap/bin/alacritty
-export PATH="$HOME/Development/Flutter/bin/flutter/bin:$PATH"
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+export PATH="$PATH:/usr/local/android-studio/bin"
+
+# FVM
+export PATH="/home/kforjan/.fvm_flutter/bin:$PATH"
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /home/kforjan/.config/.dart-cli-completion/zsh-config.zsh ]] && . /home/kforjan/.config/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+export PATH="/home/kforjan/.config/herd-lite/bin:$PATH"
+export PHP_INI_SCAN_DIR="/home/kforjan/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
