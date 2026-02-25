@@ -72,3 +72,12 @@ export NVM_DIR="$HOME/.nvm"
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
 autoload -Uz compinit && compinit
+. $(brew --prefix asdf)/libexec/asdf.sh
+
+if [ -f .env ]; then
+  set -a
+  source .env
+  set +a
+fi
+
+export RUBYOPT="-r$HOME/.rubyopenssl_default_store.rb $RUBYOPT"
