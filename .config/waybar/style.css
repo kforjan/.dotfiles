@@ -123,3 +123,8 @@ label:focus {
   color: #ffffff; /* todo */
   font-weight: bold;
 }
+
+#custom-keyboard-layout {
+  padding: 0 10px;
+  color: #ffffff;
+}
