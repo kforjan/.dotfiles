@@ -1,0 +1,21 @@
+theme = Rose Pine
+
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor
+
+copy-on-select = clipboard
+link-url = true
+mouse-hide-while-typing = true
+
+confirm-close-surface = false
+
+keybind = alt+z=toggle_fullscreen
+keybind = alt+r=reload_config 
+
+font-size = 16
+font-feature = -calt
+font-feature = -liga
+font-feature = -dlig
+
+macos-titlebar-style = hidden

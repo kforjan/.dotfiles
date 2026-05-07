@@ -81,3 +81,4 @@ if [ -f .env ]; then
 fi
 
 export RUBYOPT="-r$HOME/.rubyopenssl_default_store.rb $RUBYOPT"
+export PATH="$HOME/.local/bin:$PATH"
