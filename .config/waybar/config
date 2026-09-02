@@ -14,6 +14,8 @@
     "custom/separator",
     "network",
     "custom/separator",
+    "custom/vpn",
+    "custom/separator",
     "temperature",
     "custom/separator",
     "bluetooth",
@@ -79,6 +81,7 @@
     "interval": 5,
   },
   "network": {
+    "interface": "wlan0",
     "format": "{ifname}",
     "format-wifi": "  {essid}",
     "format-ethernet": " ",
@@ -119,6 +122,12 @@
     "tooltip-format": "{controller_alias}\n{controller_address}\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias} ({device_address})\n{device_battery_percentage}%",
     "on-click": "blueman-manager"
+  },
+  "custom/vpn": {
+    "exec": "~/.dotfiles/.config/waybar/scripts/vpn-status.sh",
+    "interval": 5,
+    "format": "{}",
+    "tooltip": false
   },
   "custom/separator": {
     "exec": "echo '│'",

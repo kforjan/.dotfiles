@@ -81,3 +81,12 @@ export PATH="/home/kforjan/.fvm_flutter/bin:$PATH"
 ## [/Completion]
 export PATH="/home/kforjan/.config/herd-lite/bin:$PATH"
 export PHP_INI_SCAN_DIR="/home/kforjan/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
+export PATH="$HOME/Development/bin/flutter/bin:$PATH"
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/kforjan/.lmstudio/bin"
+# End of LM Studio CLI section
+
