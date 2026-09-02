@@ -43,6 +43,11 @@
 [push]
 	autoSetupRemote = true
 	followTags = true
+	# submodule.recurse applies to push too, which makes it try to push a branch
+	# named arch/macos into the submodule - that repo only has main. `check`
+	# instead verifies the submodule commit is already on its remote, catching a
+	# dangling pointer before the parent goes out.
+	recurseSubmodules = check
 
 [pull]
 	rebase = true
