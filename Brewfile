@@ -120,6 +120,7 @@ cask "alacritty"
 cask "android-platform-tools"
 # Audio utility
 cask "background-music"
+cask "font-jetbrains-mono-nerd-font"
 cask "font-ubuntu-nerd-font"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"

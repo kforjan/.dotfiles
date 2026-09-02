@@ -41,8 +41,8 @@ It covers ghostty, aerospace, borders (aerospace has no focus ring without it),
 neovim, tmux, fzf, zoxide, bat, eza, fd, ripgrep, git-delta, direnv and asdf.
 `git-delta` is not optional: `.gitconfig` sets it as `core.pager`.
 
-FiraCode Nerd Font is installed manually, not via brew, so it is not in the
-Brewfile: `brew install --cask font-fira-code-nerd-font` on a fresh machine.
+The terminal font is JetBrainsMono Nerd Font, matching the arch branch. It is
+in the Brewfile, so `brew bundle` installs it.
 
 Run `macos-defaults.sh` once per machine, then log out. It mainly disables the
 macOS 15+ edge-drag tiling, which resizes windows behind aerospace's back.
