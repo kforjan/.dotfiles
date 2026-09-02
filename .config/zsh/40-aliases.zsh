@@ -1,6 +1,6 @@
 alias vim=nvim
 alias c=clear
-(( $+commands[bat] )) && alias cat='bat --paging=never'
+(( $+commands[bat] )) && alias cat='bat --paging=never --style=plain'
 
 if (( $+commands[eza] )); then
   alias ls='eza --group-directories-first --icons=auto'
