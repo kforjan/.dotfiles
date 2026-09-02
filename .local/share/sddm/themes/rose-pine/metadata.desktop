@@ -1,0 +1,9 @@
+[SddmGreeterTheme]
+Name=Rose Pine
+Description=Minimal Rose Pine login matching the Hyprland desktop
+Author=kforjan
+Type=sddm-theme
+Version=1.0
+License=MIT
+MainScript=Main.qml
+ConfigFile=theme.conf

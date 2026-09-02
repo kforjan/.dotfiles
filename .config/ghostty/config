@@ -1,5 +1,11 @@
 theme = Rose Pine
 
+font-family = "JetBrainsMono Nerd Font"
+font-size = 16
+font-feature = -calt
+font-feature = -liga
+font-feature = -dlig
+
 cursor-style = block
 cursor-style-blink = false
 shell-integration-features = no-cursor
@@ -10,10 +16,16 @@ mouse-hide-while-typing = true
 
 confirm-close-surface = false
 
-keybind = alt+z=toggle_fullscreen
-keybind = alt+r=reload_config 
+gtk-single-instance = true
 
-font-size = 16
-font-feature = -calt
-font-feature = -liga
-font-feature = -dlig
+window-padding-x = 8
+window-padding-y = 4
+window-padding-balance = true
+
+scrollback-limit = 1000000
+
+resize-overlay = never
+app-notifications = false
+
+keybind = alt+z=toggle_fullscreen
+keybind = alt+r=reload_config

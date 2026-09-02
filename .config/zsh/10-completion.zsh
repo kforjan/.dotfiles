@@ -1,0 +1,28 @@
+fpath=($ZPLUG/plugins/zsh-completions/src $fpath)
+
+autoload -Uz compinit
+() {
+  local dump=${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-$ZSH_VERSION
+  [[ -d ${dump:h} ]] || mkdir -p ${dump:h}
+
+  local -a fresh=(${dump}(#qN.mh-24))
+  if (( $#fresh )); then
+    compinit -C -d $dump
+  else
+    compinit -d $dump
+    { zcompile -R -- ${dump}.zwc $dump } &!
+  fi
+}
+
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompcache
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':completion:*' special-dirs true
+
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always --icons=auto $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -1 --color=always --icons=auto $realpath'
+zstyle ':fzf-tab:complete:(cat|bat|nvim|vim|less):*' fzf-preview 'bat --color=always --style=plain --line-range=:200 $realpath 2>/dev/null || cat $realpath'
+zstyle ':fzf-tab:*' switch-group '<' '>'

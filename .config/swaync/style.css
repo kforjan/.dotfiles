@@ -1,0 +1,239 @@
+:root {
+  /* these moved out of config.json; swaync 0.12 reads them from CSS */
+  --notification-icon-size: 48px;
+  --mpris-album-art-icon-size: 84px;
+}
+
+/* Rose Pine (main) - matches ghostty, nvim, waybar */
+@define-color base        #191724;
+@define-color surface     #1f1d2e;
+@define-color overlay     #26233a;
+@define-color muted       #6e6a86;
+@define-color subtle      #908caa;
+@define-color text        #e0def4;
+@define-color love        #eb6f92;
+@define-color gold        #f6c177;
+@define-color rose        #ebbcba;
+@define-color pine        #31748f;
+@define-color foam        #9ccfd8;
+@define-color iris        #c4a7e7;
+@define-color highlight   #403d52;
+
+* {
+  font-family: "JetBrainsMono Nerd Font", sans-serif;
+  font-size: 14px;
+}
+
+.notification-row {
+  outline: none;
+  background: transparent;
+}
+
+.notification {
+  background: transparent;
+  padding: 0;
+  margin: 6px 8px;
+}
+
+.notification-content {
+  background: @surface;
+  border: 1px solid @overlay;
+  border-radius: 12px;
+  padding: 12px;
+  color: @text;
+}
+
+.notification-default-action {
+  border-radius: 12px;
+  background: transparent;
+  padding: 0;
+}
+
+.notification-default-action:hover {
+  background: @overlay;
+}
+
+.summary {
+  color: @text;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.body {
+  color: @subtle;
+}
+
+.time {
+  color: @muted;
+  font-size: 12px;
+}
+
+.close-button {
+  background: transparent;
+  color: @muted;
+  border: none;
+  border-radius: 8px;
+  margin: 6px;
+  padding: 2px;
+}
+
+.close-button:hover {
+  background: @love;
+  color: @base;
+}
+
+/* severity accents on the left edge */
+.notification-row .notification-background .notification.low .notification-content {
+  border-left: 3px solid @foam;
+}
+
+.notification-row .notification-background .notification.normal .notification-content {
+  border-left: 3px solid @iris;
+}
+
+.notification-row .notification-background .notification.critical .notification-content {
+  border-left: 3px solid @love;
+}
+
+.notification-action {
+  background: @overlay;
+  color: @text;
+  border: none;
+  border-radius: 8px;
+  margin: 4px;
+  padding: 6px 10px;
+}
+
+.notification-action:hover {
+  background: @iris;
+  color: @base;
+}
+
+/* ---- control center ---- */
+
+.control-center {
+  background: @base;
+  border: 1px solid @overlay;
+  border-radius: 14px;
+  padding: 12px;
+  color: @text;
+}
+
+.control-center .notification-row .notification-background .notification-content {
+  background: @surface;
+}
+
+.control-center-list {
+  background: transparent;
+}
+
+.control-center-list-placeholder {
+  color: @muted;
+  opacity: 1;
+}
+
+.widget-title {
+  color: @text;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 6px 4px 10px 4px;
+}
+
+.widget-title > button {
+  background: @overlay;
+  color: @subtle;
+  border: none;
+  border-radius: 8px;
+  padding: 4px 12px;
+  font-size: 13px;
+  font-weight: normal;
+}
+
+.widget-title > button:hover {
+  background: @love;
+  color: @base;
+}
+
+.widget-dnd {
+  color: @text;
+  margin: 4px;
+  font-size: 14px;
+}
+
+.widget-dnd > switch {
+  background: @overlay;
+  border: none;
+  border-radius: 12px;
+}
+
+.widget-dnd > switch:checked {
+  background: @iris;
+}
+
+.widget-dnd > switch slider {
+  background: @subtle;
+  border-radius: 12px;
+}
+
+.widget-dnd > switch:checked slider {
+  background: @base;
+}
+
+.widget-mpris {
+  background: @surface;
+  border: 1px solid @overlay;
+  border-radius: 12px;
+  padding: 8px;
+  margin: 6px 2px;
+}
+
+.widget-mpris-title {
+  color: @text;
+  font-weight: bold;
+}
+
+.widget-mpris-subtitle {
+  color: @subtle;
+  font-size: 12px;
+}
+
+.widget-mpris > box > button {
+  background: transparent;
+  color: @subtle;
+  border: none;
+}
+
+.widget-mpris > box > button:hover {
+  color: @iris;
+}
+
+.widget-volume {
+  background: @surface;
+  border: 1px solid @overlay;
+  border-radius: 12px;
+  padding: 8px 12px;
+  margin: 6px 2px;
+  color: @text;
+}
+
+.widget-volume trough {
+  background: @overlay;
+  border-radius: 8px;
+}
+
+.widget-volume highlight {
+  background: @foam;
+  border-radius: 8px;
+}
+
+.widget-volume slider {
+  background: @text;
+  border-radius: 50%;
+}
+
+.per-app-volume {
+  background: @overlay;
+  border-radius: 8px;
+  padding: 4px 8px;
+  margin: 4px;
+}

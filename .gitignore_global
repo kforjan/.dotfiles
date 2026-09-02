@@ -1,0 +1,8 @@
+# editor / tooling droppings that don't belong in any project's .gitignore
+.DS_Store
+*.swp
+.direnv/
+.idea/
+.vscode/
+tags
+.claude/settings.local.json
