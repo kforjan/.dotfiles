@@ -5,7 +5,7 @@ fi
 _dotfiles_path
 
 ZDOTFILES=${XDG_CONFIG_HOME:-$HOME/.config}/zsh
-ZPLUG=$HOME/.oh-my-zsh/custom
+ZPLUGINS=${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins
 
 for _zf in $ZDOTFILES/[0-9]*.zsh(N); do
   source $_zf

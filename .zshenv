@@ -26,6 +26,7 @@ _dotfiles_path() {
 
   path=(
     $HOME/.local/bin
+    $HOME/.local/scripts/
     $HOME/.asdf/shims
     $HOME/.pub-cache/bin
     $HOME/go/bin

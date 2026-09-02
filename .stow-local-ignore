@@ -15,4 +15,5 @@ _darcs
 ^/LICENSE.*
 ^/COPYING
 ^/Brewfile
+^/\.ruby-lsp
 ^/macos-defaults\.sh

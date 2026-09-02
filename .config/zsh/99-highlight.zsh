@@ -1,1 +1,1 @@
-source $ZPLUG/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $ZPLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

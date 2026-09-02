@@ -1,5 +1,5 @@
 [[ -n $HOMEBREW_PREFIX ]] && fpath=($HOMEBREW_PREFIX/share/zsh/site-functions $fpath)
-fpath=($ZPLUG/plugins/zsh-completions/src $fpath)
+fpath=($ZPLUGINS/zsh-completions/src $fpath)
 [[ -d $HOME/.asdf/completions ]] && fpath=($HOME/.asdf/completions $fpath)
 
 autoload -Uz compinit
@@ -27,7 +27,7 @@ zstyle ':completion:*' cache-path ${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompcache
 zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*' special-dirs true
 
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls -G $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls -G $realpath'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always --icons=auto $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -1 --color=always --icons=auto $realpath'
 zstyle ':fzf-tab:complete:(cat|bat|nvim|vim|less):*' fzf-preview 'bat --color=always --style=plain --line-range=:200 $realpath 2>/dev/null || cat $realpath'
 zstyle ':fzf-tab:*' switch-group '<' '>'

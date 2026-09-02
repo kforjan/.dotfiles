@@ -26,6 +26,7 @@ with the `arch` branch; `git submodule update --init` if you cloned without `--r
 | `.config/nvim` | neovim (submodule) |
 | `.config/aerospace` | tiling window manager |
 | `.config/alacritty` | legacy terminal, superseded by ghostty |
+| `.local/scripts` | `zsh-plugins` |
 | `.inputrc` | readline vi mode |
 
 ## Requirements
@@ -69,19 +70,17 @@ dependency) which would otherwise win for every non-interactive shell, so
 
 ### zsh plugins
 
-`.zshrc` sources these directly (no framework). The `~/.oh-my-zsh/custom` paths
-are kept only so both branches share one layout; oh-my-zsh itself is not loaded.
-All five are already present on this machine:
-
 ```sh
-ZC=~/.oh-my-zsh/custom
-mkdir -p $ZC/themes $ZC/plugins
-git clone --depth=1 https://github.com/romkatv/powerlevel10k             $ZC/themes/powerlevel10k
-git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions     $ZC/plugins/zsh-autosuggestions
-git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting $ZC/plugins/zsh-syntax-highlighting
-git clone --depth=1 https://github.com/zsh-users/zsh-completions         $ZC/plugins/zsh-completions
-git clone --depth=1 https://github.com/Aloxaf/fzf-tab                    $ZC/plugins/fzf-tab
+~/.local/scripts/zsh-plugins
 ```
+
+Clones powerlevel10k, zsh-autosuggestions, zsh-syntax-highlighting,
+zsh-completions and fzf-tab into `~/.local/share/zsh/plugins/`, or pulls them
+if already present. Idempotent, so it is both the bootstrap and the updater.
+
+To add a plugin: clone it next to the others, then add one `source` line to
+`.config/zsh/20-plugins.zsh` (or `10-completion.zsh` if it ships completions,
+which must be on fpath before compinit).
 
 ### tmux plugins
 
