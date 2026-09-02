@@ -8,7 +8,7 @@
 	pager = delta
 	fsmonitor = true
 	untrackedCache = true
-	excludesfile = ~/.dotfiles/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	editor = nvim
 
 [interactive]

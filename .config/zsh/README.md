@@ -5,7 +5,7 @@ Sourced by `~/.zshrc` in filename order. The numbers encode real dependencies:
 | `00-options` | `bindkey -v` copies the vi keymap over `main`; anything bound before it is lost |
 | `10-completion` | `compinit` must run before fzf-tab can wrap it |
 | `20-plugins` | fzf-tab, autosuggestions, p10k theme |
-| `30-tools` | asdf, lazy nvm, `fzf --zsh` and `zoxide init` define widgets `50-keybinds` binds |
+| `30-tools` | lazy nvm, `fzf --zsh` and `zoxide init` define widgets `50-keybinds` binds |
 | `40-aliases` | no ordering constraints |
 | `50-keybinds` | needs widgets from 20 and 30 to exist |
 | `90-prompt` | `~/.p10k.zsh` |
@@ -21,7 +21,12 @@ Files not matching `[0-9]*.zsh` are ignored, so scratch files are safe to leave 
   makes the second call idempotent.
 - Homebrew's env is hardcoded rather than `eval "$(brew shellenv)"` — same
   result, one less subprocess per shell.
-- `nvm` is lazy: the first `nvm`/`node`/`npm`/`npx` call sources `nvm.sh`.
-  Nothing else pays for it.
-- asdf is sourced from a hardcoded path. `$(brew --prefix asdf)` starts
-  Homebrew's Ruby, which alone cost several hundred ms on every shell.
+- `nvm` is lazy, but node is not. `.zshenv` puts nvm's default version on PATH
+  outright, because Homebrew ships its own node as a dependency of firebase-cli,
+  heroku and prettierd. Sourcing `nvm.sh` only in `.zshrc` would leave every
+  non-interactive shell on the Homebrew build, so `node` in a terminal and
+  `node` in a Makefile would disagree. The first `nvm` call sources the script.
+- asdf needs no shell integration at 0.16+; it is a Go binary driven entirely by
+  `~/.asdf/shims`, which `.zshenv` adds. There is nothing to source.
+- `LS_COLORS` is set in `10-completion` because macOS has no `dircolors`. Both
+  the completion menu and eza read it.

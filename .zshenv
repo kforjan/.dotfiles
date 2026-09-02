@@ -15,11 +15,22 @@ _dotfiles_path() {
     path=($HOMEBREW_PREFIX/bin $HOMEBREW_PREFIX/sbin $path)
   fi
 
+  export NVM_DIR=$HOME/.nvm
+  local -a nvm_bin
+  [[ -r $NVM_DIR/alias/default ]] && {
+    local v=$(<$NVM_DIR/alias/default)
+    nvm_bin=($NVM_DIR/versions/node/v${v#v}*/bin(N/n))
+  }
+  (( $#nvm_bin )) || nvm_bin=($NVM_DIR/versions/node/*/bin(N/n))
+  (( $#nvm_bin )) && path=($nvm_bin[-1] $path)
+
   path=(
     $HOME/.local/bin
     $HOME/.asdf/shims
     $HOME/.pub-cache/bin
     $HOME/go/bin
+    $HOME/Development/bin/flutter/bin
+    $HOME/.cargo/bin
     $path
   )
 }

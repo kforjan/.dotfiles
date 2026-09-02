@@ -30,29 +30,57 @@ with the `arch` branch; `git submodule update --init` if you cloned without `--r
 
 ## Requirements
 
+Verified against this machine (Apple Silicon, macOS 26.5, Homebrew at `/opt/homebrew`).
+
+Already installed: `stow tmux neovim fzf zoxide bat fd ripgrep asdf coreutils`,
+`--cask ghostty aerospace`, FiraCode Nerd Font.
+
+Still missing:
+
 ```sh
-# terminal + shell
-brew install --cask ghostty
-brew install zsh stow tmux neovim
-
-# CLI tools the configs assume
-brew install fzf zoxide bat eza fd ripgrep git-delta direnv jq
-
-# window manager
-brew install --cask nikitabobko/tap/aerospace
+brew install git-delta eza direnv
 brew install felixkratz/formulae/borders     # focus ring for aerospace
-
-# font
-brew install --cask font-fira-code-nerd-font
 ```
 
-`git-delta` is not optional — `.gitconfig` sets it as `core.pager`, so git will
-error on every diff without it.
+`git-delta` is not optional — `.gitconfig` sets it as `core.pager`, so git
+errors on every diff without it. `eza` and `direnv` are both guarded: the `ls`
+aliases fall back to BSD `ls -G` and the `direnv` hook is skipped, so the shell
+works without them.
+
+For a fresh machine:
+
+```sh
+brew install --cask ghostty aerospace font-fira-code-nerd-font
+brew install zsh stow tmux neovim fzf zoxide bat eza fd ripgrep git-delta direnv asdf coreutils
+brew install felixkratz/formulae/borders
+```
+
+### asdf
+
+asdf here is 0.19 (the Go rewrite). It has no `libexec/asdf.sh` and needs no
+shell integration — `~/.asdf/shims` on PATH is the whole story. Completions are
+not generated automatically:
+
+```sh
+asdf completion zsh > ~/.asdf/completions/_asdf
+```
+
+It manages ruby only (`~/.tool-versions`). node comes from nvm; `rbenv` is
+installed but inert, since asdf's shims precede it on PATH.
+
+### node
+
+`.zshenv` puts nvm's default node on PATH directly rather than sourcing
+`nvm.sh`. Homebrew has its own node (a `firebase-cli`/`heroku`/`prettierd`
+dependency) which would otherwise win for every non-interactive shell, so
+`node` in a terminal and `node` in a Makefile would be different versions.
+`nvm` itself stays lazy — first call sources the script.
 
 ### zsh plugins
 
 `.zshrc` sources these directly (no framework). The `~/.oh-my-zsh/custom` paths
-are kept only so both branches share one layout:
+are kept only so both branches share one layout; oh-my-zsh itself is not loaded.
+All five are already present on this machine:
 
 ```sh
 ZC=~/.oh-my-zsh/custom
@@ -66,12 +94,14 @@ git clone --depth=1 https://github.com/Aloxaf/fzf-tab                    $ZC/plu
 
 ### tmux plugins
 
-```sh
-git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
-```
+tpm is already at `~/.config/tmux/plugins/tpm` (the XDG path `tmux.conf`
+prefers; `~/.tmux/plugins/tpm` is a stale leftover and is only a fallback).
+`tmux-resurrect` and `tmux-continuum` are declared but not yet cloned, so
+`@continuum-restore` does nothing until:
 
-Then `prefix + I` inside tmux. `tmux.conf` falls back to `~/.tmux/plugins/tpm`
-if the XDG path doesn't exist yet.
+```sh
+tmux   # then: prefix + I
+```
 
 ### optional
 
@@ -86,3 +116,9 @@ brew tap homebrew/command-not-found   # "did you mean brew install X" in zsh
 - The old `.zshrc` sourced `.env` from the current directory at startup. That is
   gone — any cloned repo could execute code in your shell. `direnv` does the
   same job safely; run `direnv allow` per project.
+- `aerospace` reads its config at launch. After editing `aerospace.toml` run
+  `aerospace reload-config` (or `cmd-shift-semicolon` then `esc`), otherwise the
+  running instance keeps the old bindings.
+- Startup cost, measured: the pre-rewrite `.zshrc` took ~1980 ms per shell
+  (`compinit` ran three times, and `nvm.sh` was sourced eagerly). It is now
+  ~52 ms. That stall was the `^[` echo when pressing Escape in a fresh pane.
