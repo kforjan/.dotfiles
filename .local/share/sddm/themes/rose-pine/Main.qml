@@ -1,11 +1,10 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.15
+import QtQuick 2.0
 
 Rectangle {
     id: root
     color: "#191724"
 
+    // Rose Pine (main)
     readonly property color base:    "#191724"
     readonly property color surface: "#1f1d2e"
     readonly property color overlay: "#26233a"
@@ -13,10 +12,15 @@ Rectangle {
     readonly property color subtle:  "#908caa"
     readonly property color text:    "#e0def4"
     readonly property color love:    "#eb6f92"
-    readonly property color foam:    "#9ccfd8"
     readonly property color iris:    "#c4a7e7"
 
     property int sessionIndex: sessionModel.lastIndex
+    property string fontName: config.font ? config.font : "Sans"
+
+    function doLogin() {
+        message.text = ""
+        sddm.login(userInput.text, passwordInput.text, root.sessionIndex)
+    }
 
     Image {
         anchors.fill: parent
@@ -32,119 +36,146 @@ Rectangle {
         opacity: 0.55
     }
 
-    ColumnLayout {
+    Column {
         anchors.centerIn: parent
-        spacing: 10
+        spacing: 8
 
         Text {
-            Layout.alignment: Qt.AlignHCenter
+            anchors.horizontalCenter: parent.horizontalCenter
             text: Qt.formatDateTime(clock.now, "HH:mm")
             color: root.text
+            font.family: root.fontName
             font.pointSize: 64
-            font.family: config.font
             font.weight: Font.Light
         }
 
         Text {
-            Layout.alignment: Qt.AlignHCenter
+            anchors.horizontalCenter: parent.horizontalCenter
             text: Qt.formatDateTime(clock.now, "dddd, d MMMM")
             color: root.subtle
+            font.family: root.fontName
             font.pointSize: 14
-            font.family: config.font
-            bottomPadding: 40
         }
 
-        Text {
-            Layout.alignment: Qt.AlignHCenter
-            text: userField.text.length ? userField.text : "…"
-            color: root.text
-            font.pointSize: 16
-            font.family: config.font
-            bottomPadding: 6
-        }
+        Item { width: 1; height: 40 }
 
-        TextField {
-            id: userField
-            Layout.preferredWidth: 340
-            Layout.alignment: Qt.AlignHCenter
-            text: userModel.lastUser
-            color: root.text
-            font.family: config.font
-            font.pointSize: 12
-            horizontalAlignment: TextInput.AlignHCenter
-            background: Rectangle {
-                radius: 10
-                color: root.surface
-                border.width: 1
-                border.color: userField.activeFocus ? root.iris : root.overlay
+        // username
+        Rectangle {
+            width: 340; height: 46
+            radius: 10
+            color: root.surface
+            border.width: 1
+            border.color: userInput.activeFocus ? root.iris : root.overlay
+
+            TextInput {
+                id: userInput
+                anchors.fill: parent
+                anchors.margins: 12
+                verticalAlignment: TextInput.AlignVCenter
+                horizontalAlignment: TextInput.AlignHCenter
+                text: userModel.lastUser
+                color: root.text
+                font.family: root.fontName
+                font.pointSize: 12
+                selectionColor: root.iris
+                selectedTextColor: root.base
+                clip: true
+                KeyNavigation.tab: passwordInput
+                onAccepted: passwordInput.forceActiveFocus()
             }
-            onAccepted: passwordField.forceActiveFocus()
         }
 
-        TextField {
-            id: passwordField
-            Layout.preferredWidth: 340
-            Layout.alignment: Qt.AlignHCenter
-            echoMode: TextInput.Password
-            placeholderText: "Password"
-            placeholderTextColor: root.muted
-            color: root.text
-            font.family: config.font
-            font.pointSize: 12
-            horizontalAlignment: TextInput.AlignHCenter
-            focus: true
-            background: Rectangle {
-                radius: 10
-                color: root.surface
-                border.width: 1
-                border.color: passwordField.activeFocus ? root.iris : root.overlay
+        Rectangle {
+            width: 340; height: 46
+            radius: 10
+            color: root.surface
+            border.width: 1
+            border.color: passwordInput.activeFocus ? root.iris : root.overlay
+
+            TextInput {
+                id: passwordInput
+                anchors.fill: parent
+                anchors.margins: 12
+                verticalAlignment: TextInput.AlignVCenter
+                horizontalAlignment: TextInput.AlignHCenter
+                echoMode: TextInput.Password
+                passwordCharacter: "•"
+                color: root.text
+                font.family: root.fontName
+                font.pointSize: 12
+                clip: true
+                focus: true
+                onAccepted: root.doLogin()
             }
-            onAccepted: sddm.login(userField.text, passwordField.text, root.sessionIndex)
+
+            // TextInput has no placeholderText; this stands in for it.
+            Text {
+                anchors.centerIn: parent
+                text: "Password"
+                color: root.muted
+                font.family: root.fontName
+                font.pointSize: 12
+                visible: passwordInput.text.length === 0 && !passwordInput.activeFocus
+            }
         }
 
         Text {
             id: message
-            Layout.alignment: Qt.AlignHCenter
-            Layout.preferredWidth: 340
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: 340
             horizontalAlignment: Text.AlignHCenter
             color: root.love
-            font.family: config.font
+            font.family: root.fontName
             font.pointSize: 10
             text: ""
         }
     }
 
-    RowLayout {
+    Row {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.margins: 24
-        spacing: 16
+        spacing: 22
 
-        ComboBox {
-            id: sessionBox
-            model: sessionModel
-            textRole: "name"
-            currentIndex: root.sessionIndex
-            onActivated: root.sessionIndex = currentIndex
-            font.family: config.font
+        Text {
+            text: sessionModel.count > 0
+                  ? sessionModel.data(sessionModel.index(root.sessionIndex, 0), Qt.UserRole + 4)
+                  : ""
+            color: root.subtle
+            font.family: root.fontName
             font.pointSize: 10
-            implicitWidth: 220
+
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                onClicked: root.sessionIndex = (root.sessionIndex + 1) % sessionModel.count
+            }
         }
 
-        Button {
+        Text {
             text: "Reboot"
-            enabled: sddm.canReboot
-            font.family: config.font
+            color: sddm.canReboot ? root.subtle : root.muted
+            font.family: root.fontName
             font.pointSize: 10
-            onClicked: sddm.reboot()
+            MouseArea {
+                anchors.fill: parent
+                enabled: sddm.canReboot
+                cursorShape: Qt.PointingHandCursor
+                onClicked: sddm.reboot()
+            }
         }
 
-        Button {
+        Text {
             text: "Shutdown"
-            enabled: sddm.canPowerOff
-            font.family: config.font
+            color: sddm.canPowerOff ? root.subtle : root.muted
+            font.family: root.fontName
             font.pointSize: 10
-            onClicked: sddm.powerOff()
+            MouseArea {
+                anchors.fill: parent
+                enabled: sddm.canPowerOff
+                cursorShape: Qt.PointingHandCursor
+                onClicked: sddm.powerOff()
+            }
         }
     }
 
@@ -162,15 +193,12 @@ Rectangle {
 
     Connections {
         target: sddm
-        function onLoginFailed() {
+        onLoginFailed: {
             message.text = "Login failed"
-            passwordField.text = ""
-            passwordField.forceActiveFocus()
-        }
-        function onLoginSucceeded() {
-            message.text = ""
+            passwordInput.text = ""
+            passwordInput.forceActiveFocus()
         }
     }
 
-    Component.onCompleted: passwordField.forceActiveFocus()
+    Component.onCompleted: passwordInput.forceActiveFocus()
 }
