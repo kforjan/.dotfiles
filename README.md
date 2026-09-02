@@ -30,30 +30,21 @@ with the `arch` branch; `git submodule update --init` if you cloned without `--r
 
 ## Requirements
 
-Verified against this machine (Apple Silicon, macOS 26.5, Homebrew at `/opt/homebrew`).
-
-Already installed: `stow tmux neovim fzf zoxide bat fd ripgrep asdf coreutils`,
-`--cask ghostty aerospace`, FiraCode Nerd Font.
-
-Still missing:
+`Brewfile` is a dump of this machine, so a new box is:
 
 ```sh
-brew install git-delta eza direnv
-brew install felixkratz/formulae/borders     # focus ring for aerospace
+brew bundle install --file=~/.dotfiles/Brewfile
 ```
 
-`git-delta` is not optional — `.gitconfig` sets it as `core.pager`, so git
-errors on every diff without it. `eza` and `direnv` are both guarded: the `ls`
-aliases fall back to BSD `ls -G` and the `direnv` hook is skipped, so the shell
-works without them.
+It covers ghostty, aerospace, borders (aerospace has no focus ring without it),
+neovim, tmux, fzf, zoxide, bat, eza, fd, ripgrep, git-delta, direnv and asdf.
+`git-delta` is not optional: `.gitconfig` sets it as `core.pager`.
 
-For a fresh machine:
+FiraCode Nerd Font is installed manually, not via brew, so it is not in the
+Brewfile: `brew install --cask font-fira-code-nerd-font` on a fresh machine.
 
-```sh
-brew install --cask ghostty aerospace font-fira-code-nerd-font
-brew install zsh stow tmux neovim fzf zoxide bat eza fd ripgrep git-delta direnv asdf coreutils
-brew install felixkratz/formulae/borders
-```
+Run `macos-defaults.sh` once per machine, then log out. It mainly disables the
+macOS 15+ edge-drag tiling, which resizes windows behind aerospace's back.
 
 ### asdf
 
@@ -94,8 +85,8 @@ git clone --depth=1 https://github.com/Aloxaf/fzf-tab                    $ZC/plu
 
 ### tmux plugins
 
-tpm is already at `~/.config/tmux/plugins/tpm` (the XDG path `tmux.conf`
-prefers; `~/.tmux/plugins/tpm` is a stale leftover and is only a fallback).
+tpm lives at `~/.config/tmux/plugins/tpm`. `tmux.conf` still falls back to
+`~/.tmux/plugins/tpm` for a fresh machine where tpm gets cloned there instead.
 `tmux-resurrect` and `tmux-continuum` are declared but not yet cloned, so
 `@continuum-restore` does nothing until:
 

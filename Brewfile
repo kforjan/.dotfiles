@@ -23,6 +23,8 @@ brew "deno"
 brew "direnv"
 # Pack, ship and run any application as a lightweight container
 brew "docker", link: false
+# Bash, Zsh and Fish completion for Docker
+brew "docker-completion"
 # Isolated development environments using Docker
 brew "docker-compose"
 # Perl lib for reading and writing EXIF metadata
@@ -65,8 +67,6 @@ brew "lua"
 brew "luarocks"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
-# Manage multiple Node.js versions
-brew "nvm"
 # OpenBSD freely-licensed SSH connectivity tools
 brew "openssh"
 # Cryptography and SSL/TLS Toolkit
@@ -89,8 +89,6 @@ brew "pre-commit"
 brew "prettierd"
 # Tools for and transforming and inspecting PDF files
 brew "qpdf"
-# Ruby version manager
-brew "rbenv"
 # Persistent key-value database, with built-in net interface
 brew "redis", restart_service: :changed
 # Search tool like grep and The Silver Searcher
@@ -105,16 +103,12 @@ brew "tree"
 brew "tree-sitter-cli"
 # Internet file retriever
 brew "wget"
-# Access X11 clipboards from the command-line
-brew "xclip"
 # JavaScript package manager
 brew "yarn"
 # General-purpose lossless data-compression library
 brew "zlib"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
-# Next-generation plugin manager for zsh
-brew "zplug"
 # Fish shell like syntax highlighting for zsh
 brew "zsh-syntax-highlighting"
 # A window border system for macOS
@@ -126,8 +120,6 @@ cask "alacritty"
 cask "android-platform-tools"
 # Audio utility
 cask "background-music"
-# Automated testing of webapps for Google Chrome
-cask "chromedriver"
 cask "font-ubuntu-nerd-font"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
