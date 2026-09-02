@@ -1,4 +1,4 @@
-fpath=($ZPLUG/plugins/zsh-completions/src $fpath)
+fpath=($ZPLUGINS/zsh-completions/src $fpath)
 
 autoload -Uz compinit
 () {

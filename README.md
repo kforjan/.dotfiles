@@ -28,7 +28,7 @@ stow .
 | `.config/wofi` | launcher |
 | `.config/wireplumber` | audio device priority |
 | `.local/share/sddm/themes/rose-pine` | login screen (SDDM) |
-| `.local/scripts` | install helpers |
+| `.local/scripts` | `zsh-plugins`, `install-sddm-theme` |
 | `.inputrc` | readline vi mode |
 
 ## Requirements
@@ -50,17 +50,17 @@ Run `pkgfile --update` once so the zsh command-not-found handler works.
 
 ### zsh plugins
 
-`.zshrc` sources these directly (no framework). Clone into
-`~/.oh-my-zsh/custom/` — the paths are kept for continuity with the macOS branch:
-
 ```sh
-ZC=~/.oh-my-zsh/custom
-git clone --depth=1 https://github.com/romkatv/powerlevel10k          $ZC/themes/powerlevel10k
-git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions  $ZC/plugins/zsh-autosuggestions
-git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting $ZC/plugins/zsh-syntax-highlighting
-git clone --depth=1 https://github.com/zsh-users/zsh-completions      $ZC/plugins/zsh-completions
-git clone --depth=1 https://github.com/Aloxaf/fzf-tab                 $ZC/plugins/fzf-tab
+~/.local/scripts/zsh-plugins
 ```
+
+Clones powerlevel10k, zsh-autosuggestions, zsh-syntax-highlighting,
+zsh-completions and fzf-tab into `~/.local/share/zsh/plugins/`, or pulls them
+if already present. Idempotent, so it is both the bootstrap and the updater.
+
+To add a plugin: clone it next to the others, then add one `source` line to
+`.config/zsh/20-plugins.zsh` (or `10-completion.zsh` if it ships completions,
+which must be on fpath before compinit).
 
 ### tmux plugins
 
