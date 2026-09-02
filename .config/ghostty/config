@@ -1,5 +1,11 @@
 theme = Rose Pine
 
+font-family = "FiraCode Nerd Font"
+font-size = 16
+font-feature = -calt
+font-feature = -liga
+font-feature = -dlig
+
 cursor-style = block
 cursor-style-blink = false
 shell-integration-features = no-cursor
@@ -10,12 +16,17 @@ mouse-hide-while-typing = true
 
 confirm-close-surface = false
 
-keybind = alt+z=toggle_fullscreen
-keybind = alt+r=reload_config 
-
-font-size = 16
-font-feature = -calt
-font-feature = -liga
-font-feature = -dlig
-
 macos-titlebar-style = hidden
+macos-option-as-alt = true
+
+window-padding-x = 8
+window-padding-y = 4
+window-padding-balance = true
+
+resize-overlay = never
+app-notifications = false
+
+scrollback-limit = 1000000
+
+keybind = alt+z=toggle_fullscreen
+keybind = alt+r=reload_config

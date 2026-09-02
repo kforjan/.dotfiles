@@ -1,0 +1,91 @@
+[user]
+	name = Krešimir Forjan
+
+[init]
+	defaultBranch = master
+
+[core]
+	pager = delta
+	fsmonitor = true
+	untrackedCache = true
+	excludesfile = ~/.dotfiles/.gitignore_global
+	editor = nvim
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true
+	line-numbers = true
+	hyperlinks = true
+	syntax-theme = base16-256
+	plus-style = syntax "#2a2438"
+	minus-style = normal "#3b2430"
+	file-style = "#c4a7e7" bold
+	file-decoration-style = "#6e6a86" ul
+	hunk-header-decoration-style = "#6e6a86" box
+
+[diff]
+	algorithm = histogram
+	colorMoved = default
+	renames = copies
+	mnemonicPrefix = true
+
+[merge]
+	conflictstyle = zdiff3
+	tool = nvimdiff
+
+[rerere]
+	enabled = true
+	autoUpdate = true
+
+[push]
+	autoSetupRemote = true
+	followTags = true
+
+[pull]
+	rebase = true
+
+[rebase]
+	autoStash = true
+	autoSquash = true
+	updateRefs = true
+
+[submodule]
+	recurse = true
+
+[fetch]
+	prune = true
+	pruneTags = true
+
+[branch]
+	sort = -committerdate
+
+[tag]
+	sort = version:refname
+
+[commit]
+	verbose = true
+
+[column]
+	ui = auto
+
+[help]
+	autocorrect = prompt
+
+[log]
+	date = iso
+
+[status]
+	showUntrackedFiles = all
+
+[alias]
+	s = status --short --branch
+	l = log --oneline --graph --decorate -20
+	ll = log --oneline --graph --decorate --all
+	last = show --stat HEAD
+	unstage = restore --staged
+	amend = commit --amend --no-edit
+	wip = !git add -A && git commit -m wip --no-verify
+	undo = reset --soft HEAD~1
+	branches = branch --sort=-committerdate --format='%(HEAD)%(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) (%(committerdate:relative))'

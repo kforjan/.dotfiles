@@ -1,5 +1,7 @@
 after-login-command = []
-after-startup-command = []
+after-startup-command = [
+  'exec-and-forget borders active_color=0xff1ba9e6 inactive_color=0xff595959 width=5.0'
+]
 
 start-at-login = true
 
@@ -26,7 +28,7 @@ outer.top =        0
 outer.right =      0
 
 [mode.main.binding]
-cmd-enter = 'exec-and-forget open -n -a Alacritty'
+cmd-enter = 'exec-and-forget open -n -a Ghostty'
 
 cmd-shift-f = 'fullscreen'
 

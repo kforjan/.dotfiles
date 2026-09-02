@@ -1,0 +1,7 @@
+.DS_Store
+*.swp
+.direnv/
+.idea/
+.vscode/
+tags
+.claude/settings.local.json

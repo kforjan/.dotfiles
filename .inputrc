@@ -1,2 +1,10 @@
 set editing-mode vi
 set keymap vi-command
+
+set completion-ignore-case on
+set show-all-if-ambiguous on
+set colored-stats on
+set colored-completion-prefix on
+set mark-symlinked-directories on
+set skip-completed-text on
+set bell-style none
