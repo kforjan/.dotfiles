@@ -1,5 +1,11 @@
 [user]
 	name = Krešimir Forjan
+	email = kresimir.forjan@decode.agency
+
+[includeIf "gitdir:~/Development/Personal/"]
+	path = ~/.gitconfig-personal
+[includeIf "gitdir:~/.dotfiles/"]
+	path = ~/.gitconfig-personal
 
 [init]
 	defaultBranch = master
@@ -50,7 +56,6 @@
 	autoStash = true
 	autoSquash = true
 	updateRefs = true
-
 
 [fetch]
 	prune = true
