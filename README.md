@@ -101,6 +101,10 @@ brew tap homebrew/command-not-found   # "did you mean brew install X" in zsh
 
 ## Notes
 
+- `.config/nvim` is a submodule with its own branches (`main`), so `git push`
+  does not recurse into it. Push it separately and FIRST, or a fresh clone of
+  this branch cannot fetch the commit it points at:
+  `git -C .config/nvim push origin main`
 - Completion cache lives in `~/.cache/zsh` and is rebuilt at most once a day.
   After `brew install`ing something with completions: `rm ~/.cache/zsh/zcompdump-*`.
 - The old `.zshrc` sourced `.env` from the current directory at startup. That is

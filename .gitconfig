@@ -51,8 +51,6 @@
 	autoSquash = true
 	updateRefs = true
 
-[submodule]
-	recurse = true
 
 [fetch]
 	prune = true
