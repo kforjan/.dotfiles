@@ -83,6 +83,10 @@ traverse a 0700 home directory. Re-run it after editing the theme.
 
 ## Notes
 
+- `.config/nvim` is a submodule with its own branches (`main`), so `git push`
+  does not recurse into it. Push it separately and FIRST, or a fresh clone of
+  this branch cannot fetch the commit it points at:
+  `git -C .config/nvim push origin main`
 - Completion cache lives in `~/.cache/zsh` and is rebuilt at most once a day.
   After installing something that ships completions, `rm ~/.cache/zsh/zcompdump-*`.
 - `wireplumber.conf.d/50-sink-priority.conf` demotes the AT2020 mic's output
