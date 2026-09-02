@@ -2,6 +2,7 @@ typeset -U path fpath
 
 path=(
   $HOME/.local/bin
+  $HOME/.local/scripts
   $HOME/.asdf/shims
   $HOME/.fvm_flutter/bin
   $HOME/Development/bin/flutter/bin
