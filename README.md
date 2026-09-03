@@ -29,6 +29,7 @@ stow .
 | `.config/wireplumber` | audio device priority |
 | `.local/share/sddm/themes/rose-pine` | login screen (SDDM) |
 | `.local/scripts` | `zsh-plugins`, `install-sddm-theme` |
+| `.config/systemd/user` | `tmux.service` (detached tmux at login) |
 | `.inputrc` | readline vi mode |
 
 ## Requirements
@@ -94,3 +95,15 @@ traverse a 0700 home directory. Re-run it after editing the theme.
   default output, so volume controls adjust a silent device.
 - Waybar's temperature module reads `k10temp` by absolute hwmon path; that path
   is board-specific and will need changing on other hardware.
+- `tmux.service` is the one file stow cannot fold, because `~/.config/systemd/user`
+  is a real directory holding symlinks stow does not own. So it is the one file
+  whose link does not survive a branch switch. After switching back to `arch`:
+  `stow . && systemctl --user daemon-reload && systemctl --user enable tmux.service`
+- That unit is `Type=oneshot` with `TimeoutStartSec=infinity` on purpose. It used
+  to be `Type=forking` with the default 90s timeout; the start job wedged at
+  login, and since the timeout is measured on the monotonic clock it froze over
+  suspend and fired minutes after the next resume. The timeout terminates the
+  unit's cgroup, which is where the tmux server lives, so it killed live sessions
+  (`[server exited]`). A stalled start now just sits in `activating`, harmlessly.
+- Never `systemctl --user restart tmux.service` while attached: `ExecStop` runs
+  `kill-server`. Reconnect with `tmux attach` instead.
