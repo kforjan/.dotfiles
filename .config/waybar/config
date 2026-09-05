@@ -25,7 +25,9 @@
     "custom/separator",
     "bluetooth",
     "custom/separator",
-    "hyprland/language"
+    "hyprland/language",
+    "custom/separator",
+    "custom/power"
   ],
   "hyprland/window": {
     "format": "{}",
@@ -36,10 +38,7 @@
     "separate-outputs": true
   },
   "hyprland/workspaces": {
-    "format": "{icon}",
-    "format-icons": {
-      "active": " "
-    },
+    "format": "{name}",
     "persistent-workspaces": {
       "*": 3
     },
@@ -79,7 +78,7 @@
     "critical-threshold": 85
   },
   "network": {
-    "interface": "wlan0",
+    "interface": "wl*",
     "format": "{ifname}",
     "format-wifi": "  {essid}",
     "format-ethernet": " ",
@@ -140,6 +139,12 @@
         "type": "audio-in"
       }
     ]
+  },
+  "custom/power": {
+    "format": "\uf011",
+    "tooltip": true,
+    "tooltip-format": "Power menu",
+    "on-click": "~/.dotfiles/.config/waybar/scripts/power-menu.sh"
   },
   "custom/vpn": {
     "exec": "~/.dotfiles/.config/waybar/scripts/vpn-status.sh",

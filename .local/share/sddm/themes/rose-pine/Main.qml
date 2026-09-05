@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.15
 
 Rectangle {
     id: root
@@ -13,6 +13,11 @@ Rectangle {
     readonly property color text:    "#e0def4"
     readonly property color love:    "#eb6f92"
     readonly property color iris:    "#c4a7e7"
+
+    readonly property color grad1:   "#1ba9e6"
+    readonly property color grad2:   "#135eb1"
+    readonly property color grad3:   "#8f2857"
+    readonly property color grad4:   "#9f1f4c"
 
     property int sessionIndex: sessionModel.lastIndex
     property string fontName: config.font ? config.font : "Sans"
@@ -63,9 +68,20 @@ Rectangle {
         Rectangle {
             width: 340; height: 46
             radius: 10
-            color: root.surface
-            border.width: 1
-            border.color: userInput.activeFocus ? root.iris : root.overlay
+            gradient: Gradient {
+                orientation: Gradient.Horizontal
+                GradientStop { position: 0.0;  color: userInput.activeFocus ? root.grad1 : root.overlay }
+                GradientStop { position: 0.35; color: userInput.activeFocus ? root.grad2 : root.overlay }
+                GradientStop { position: 0.7;  color: userInput.activeFocus ? root.grad3 : root.overlay }
+                GradientStop { position: 1.0;  color: userInput.activeFocus ? root.grad4 : root.overlay }
+            }
+
+            Rectangle {
+                anchors.fill: parent
+                anchors.margins: userInput.activeFocus ? 2 : 1
+                radius: 9
+                color: root.surface
+            }
 
             TextInput {
                 id: userInput
@@ -77,7 +93,7 @@ Rectangle {
                 color: root.text
                 font.family: root.fontName
                 font.pointSize: 12
-                selectionColor: root.iris
+                selectionColor: root.grad1
                 selectedTextColor: root.base
                 clip: true
                 KeyNavigation.tab: passwordInput
@@ -88,9 +104,20 @@ Rectangle {
         Rectangle {
             width: 340; height: 46
             radius: 10
-            color: root.surface
-            border.width: 1
-            border.color: passwordInput.activeFocus ? root.iris : root.overlay
+            gradient: Gradient {
+                orientation: Gradient.Horizontal
+                GradientStop { position: 0.0;  color: passwordInput.activeFocus ? root.grad1 : root.overlay }
+                GradientStop { position: 0.35; color: passwordInput.activeFocus ? root.grad2 : root.overlay }
+                GradientStop { position: 0.7;  color: passwordInput.activeFocus ? root.grad3 : root.overlay }
+                GradientStop { position: 1.0;  color: passwordInput.activeFocus ? root.grad4 : root.overlay }
+            }
+
+            Rectangle {
+                anchors.fill: parent
+                anchors.margins: passwordInput.activeFocus ? 2 : 1
+                radius: 9
+                color: root.surface
+            }
 
             TextInput {
                 id: passwordInput

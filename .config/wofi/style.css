@@ -1,94 +1,89 @@
-
 @keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 * {
-    font-family: "JetBrainsMono Nerd Font Propo";
-    font-size: 18px;
-    outline: none;
-    border: none;
-    text-shadow: none;
-    background: transparent;
-    animation: fadeIn 0.5s ease-in-out;
+  font-family: "JetBrainsMono Nerd Font Propo";
+  font-size: 18px;
+  outline: none;
+  border: none;
+  text-shadow: none;
+  background: transparent;
 }
 
 window {
-    all: unset;
-    padding: 10px;
-    border-radius: 10px;
-    background-color: rgba(25, 0, 46, 0.6); /* Kept original dark background */
-    border: 2px solid #595959; /* Inactive border color */
+  all: unset;
+  animation: fadeIn 0.5s ease-in-out;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgba(25, 0, 46, 0.6);
+  border: 2px solid #595959;
 }
 
 #inner-box {
-    margin: 2px;
-    padding: 5px;
+  margin: 2px;
+  padding: 5px;
 }
 
 #outer-box {
-    padding: 10px;
+  padding: 0;
 }
 
 #scroll {
-    margin: 0px;
-    padding: 5px;
+  margin: 0px;
+  padding: 5px;
 }
 
 #input {
-    all: unset;
-    margin: 10px;
-    padding: 10px 15px;
-    border: 2px solid #595959; /* Inactive border color */
-    outline: none;
-    color: #ffffff; /* White color for input text */
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-    background-color: rgba(36, 0, 65, 0.5);
+  all: unset;
+  margin: 10px;
+  padding: 10px 15px;
+  border: 2px solid #595959;
+  outline: none;
+  color: #ffffff;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  background-color: rgba(36, 0, 65, 0.5);
 }
 
 #input image {
-    color: #1ba9e6; /* Active blue for icon */
+  color: #1ba9e6;
 }
 
 #input:focus {
-    outline: none;
-    border: 2px solid #1ba9e6; /* Active blue border on focus */
-    border-radius: 10px;
+  outline: none;
+  border: 2px solid #1ba9e6;
+  border-radius: 10px;
 }
 
 #text {
-    margin: 5px;
-    color: #ffffff; /* White for default entry text */
-    outline: none;
+  margin: 5px;
+  color: #ffffff;
+  outline: none;
 }
 
 #entry {
-    margin: 5px;
-    padding: 10px;
-    border-radius: 8px;
-}
-
-#entry arrow {
-    color: #8f2857; /* Active purple for arrow */
+  margin: 5px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 2px solid transparent;
 }
 
 #entry:selected {
-    border: 2px solid #1ba9e6; /* Active blue border for selected entry */
-    border-radius: 8px;
-    background-color: rgba(25, 0, 46, 0.8);
+  border: 2px solid #1ba9e6;
+  border-radius: 8px;
+  background-color: rgba(25, 0, 46, 0.8);
 }
 
 #entry:selected #text {
-    color: #1ba9e6; /* Active blue for selected text */
+  color: #1ba9e6;
 }
 
 #entry:drop(active) {
-    /* Using the reddish-purple color for the drop target */
-    background-color: rgba(159, 31, 76, 0.5) !important;
+  background-color: rgba(159, 31, 76, 0.5);
 }
