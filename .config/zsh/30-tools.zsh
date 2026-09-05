@@ -11,7 +11,6 @@ export FZF_DEFAULT_OPTS='--height=40% --layout=reverse --border --info=inline'
 export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=numbers --line-range=:200 {} 2>/dev/null || ls --color {}'"
 export FZF_ALT_C_OPTS="--preview 'ls --color {}'"
 
-[[ -f $HOME/.config/envman/load.sh ]] && source $HOME/.config/envman/load.sh
 [[ -f $HOME/.config/.dart-cli-completion/zsh-config.zsh ]] &&
   source $HOME/.config/.dart-cli-completion/zsh-config.zsh
 

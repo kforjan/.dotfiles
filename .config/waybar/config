@@ -58,7 +58,7 @@
     "format-alt": "{:%d %m %Y}"
   },
   "cpu": {
-    "format": "  {usage}%",
+    "format": "{usage}%",
     "tooltip": false,
     "interval": 3
   },
@@ -110,7 +110,7 @@
         ""
       ]
     },
-    "on-click": "pavucontrol",
+    "on-click": "pwvucontrol",
     "on-click-right": "pamixer -t",
     "scroll-step": 5,
     "ignored-sinks": [
@@ -123,7 +123,7 @@
     "format-disabled": "",
     "tooltip-format": "{controller_alias}\n{controller_address}\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias} ({device_address})\n{device_battery_percentage}%",
-    "on-click": "blueman-manager"
+    "on-click": "overskride"
   },
   "tray": {
     "icon-size": 18,
