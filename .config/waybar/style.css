@@ -1,7 +1,4 @@
-@define-color grad1 #1ba9e6;
-@define-color grad2 #135eb1;
-@define-color grad3 #8f2857;
-@define-color grad4 #9f1f4c;
+@define-color urgent #9f1f4c;
 
 @define-color ground  rgba(25, 23, 36, 0.72);
 @define-color line    rgba(89, 89, 89, 0.55);
@@ -10,6 +7,7 @@
 @define-color gold    #f6c177;
 @define-color love    #eb6f92;
 @define-color foam    #9ccfd8;
+@define-color divider rgba(255, 255, 255, 0.18);
 
 * {
   font-family: "JetBrainsMono Nerd Font", Roboto, Helvetica, Arial, sans-serif;
@@ -62,13 +60,24 @@ button {
 }
 
 #workspaces button.urgent {
-  background-color: @grad4;
+  background-color: @urgent;
   color: #ffffff;
 }
 
 #window {
   color: @muted;
   padding: 0 8px;
+}
+
+tooltip {
+  background-color: @ground;
+  border: 1px solid @line;
+  border-radius: 8px;
+}
+
+tooltip label {
+  color: @text;
+  padding: 4px;
 }
 
 #clock {
@@ -90,14 +99,20 @@ button {
   color: @text;
 }
 
-#custom-separator {
-  padding: 0 2px;
-  color: rgba(255, 255, 255, 0.18);
+#pulseaudio,
+#network,
+#custom-vpn,
+#cpu,
+#temperature,
+#bluetooth,
+#language,
+#custom-power {
+  border-left: 1px solid @divider;
 }
 
 #custom-power {
-  padding: 0 10px 0 6px;
-  color: @grad4;
+  padding: 0 10px 0 9px;
+  color: @urgent;
 }
 
 #custom-power:hover {

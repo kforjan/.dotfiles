@@ -1,6 +1,4 @@
-# kforjan's dotfiles
-
-Branch layout: `arch` (this desktop), `macos`, `main`.
+# dotfiles
 
 ## Install
 
@@ -10,100 +8,18 @@ cd ~/.dotfiles
 stow .
 ```
 
-`.config/nvim` is a submodule ([kforjan/config.nvim](https://github.com/kforjan/config.nvim));
-`git submodule update --init` if you cloned without `--recurse-submodules`.
-
-## What's in here
-
-| Path | Tool |
-| --- | --- |
-| `.zshenv` | PATH + env for *every* zsh, interactive or not |
-| `.zshrc`, `.config/zsh/` | interactive zsh, split by concern (see its README) |
-| `.p10k.zsh` | powerlevel10k prompt |
-| `.config/ghostty` | terminal |
-| `.config/tmux` | tmux (plugins via tpm, not tracked) |
-| `.config/nvim` | neovim (submodule) |
-| `.config/hypr` | hyprland, hyprpaper, hyprlock |
-| `.config/waybar` | status bar |
-| `.config/wofi` | launcher |
-| `.config/wireplumber` | audio device priority |
-| `.local/share/sddm/themes/rose-pine` | login screen (SDDM) |
-| `.local/scripts` | `zsh-plugins`, `install-sddm-theme` |
-| `.config/systemd/user` | `tmux.service` (detached tmux at login) |
-| `.inputrc` | readline vi mode |
-
-## Requirements
-
-Arch packages:
 
 ```sh
-pacman -S zsh stow neovim tmux ghostty hyprland hyprpaper hyprlock hyprshot \
-          waybar wofi swaync polkit-kde-agent \
-          hypridle cliphist fzf zoxide bat ripgrep eza fd pkgfile \
-          wl-clipboard grim slurp brightnessctl playerctl pamixer pavucontrol \
-          blueman network-manager-applet nautilus \
-          ttf-jetbrains-mono-nerd
+mkdir -p ~/.local/share/zsh/plugins
+for r in romkatv/powerlevel10k zsh-users/zsh-autosuggestions \
+         zsh-users/zsh-syntax-highlighting zsh-users/zsh-completions Aloxaf/fzf-tab; do
+  git clone --depth=1 https://github.com/$r ~/.local/share/zsh/plugins/${r##*/}
+done
+
+git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm  # then prefix + I
 ```
-
-NVIDIA: `nvidia-open-dkms nvidia-utils libva-nvidia-driver egl-wayland`.
-
-Run `pkgfile --update` once so the zsh command-not-found handler works.
-
-### zsh plugins
-
-```sh
-~/.local/scripts/zsh-plugins
-```
-
-Clones powerlevel10k, zsh-autosuggestions, zsh-syntax-highlighting,
-zsh-completions and fzf-tab into `~/.local/share/zsh/plugins/`, or pulls them
-if already present. Idempotent, so it is both the bootstrap and the updater.
-
-To add a plugin: clone it next to the others, then add one `source` line to
-`.config/zsh/20-plugins.zsh` (or `10-completion.zsh` if it ships completions,
-which must be on fpath before compinit).
-
-### tmux plugins
-
-```sh
-git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
-```
-
-Then `prefix + I` inside tmux to install the rest.
-
-## Login screen
-
-SDDM, not hyprlock. hyprlock only locks a session that is already running.
-
-```sh
-~/.local/scripts/install-sddm-theme
-```
-
-It copies rather than symlinks: SDDM runs as the `sddm` user, which cannot
-traverse a 0700 home directory. Re-run it after editing the theme.
 
 ## Notes
 
-- `.config/nvim` is a submodule with its own branches (`main`), so `git push`
-  does not recurse into it. Push it separately and FIRST, or a fresh clone of
-  this branch cannot fetch the commit it points at:
-  `git -C .config/nvim push origin main`
-- Completion cache lives in `~/.cache/zsh` and is rebuilt at most once a day.
-  After installing something that ships completions, `rm ~/.cache/zsh/zcompdump-*`.
-- `wireplumber.conf.d/50-sink-priority.conf` demotes the AT2020 mic's output
-  sink. Without it WirePlumber ranks USB above HDMI and makes the mic the
-  default output, so volume controls adjust a silent device.
-- Waybar's temperature module reads `k10temp` by absolute hwmon path; that path
-  is board-specific and will need changing on other hardware.
-- `tmux.service` is the one file stow cannot fold, because `~/.config/systemd/user`
-  is a real directory holding symlinks stow does not own. So it is the one file
-  whose link does not survive a branch switch. After switching back to `arch`:
-  `stow . && systemctl --user daemon-reload && systemctl --user enable tmux.service`
-- That unit is `Type=oneshot` with `TimeoutStartSec=infinity` on purpose. It used
-  to be `Type=forking` with the default 90s timeout; the start job wedged at
-  login, and since the timeout is measured on the monotonic clock it froze over
-  suspend and fired minutes after the next resume. The timeout terminates the
-  unit's cgroup, which is where the tmux server lives, so it killed live sessions
-  (`[server exited]`). A stalled start now just sits in `activating`, harmlessly.
-- Never `systemctl --user restart tmux.service` while attached: `ExecStop` runs
-  `kill-server`. Reconnect with `tmux attach` instead.
+- SDDM theme: copy into `/usr/share/sddm/themes`, never symlink. SDDM runs as
+  the `sddm` user, which cannot traverse a 0700 home.

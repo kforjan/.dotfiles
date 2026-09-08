@@ -12,21 +12,13 @@
   "modules-right": [
     "privacy",
     "tray",
-    "custom/separator",
     "pulseaudio",
-    "custom/separator",
     "network",
-    "custom/separator",
     "custom/vpn",
-    "custom/separator",
     "cpu",
-    "custom/separator",
     "temperature",
-    "custom/separator",
     "bluetooth",
-    "custom/separator",
     "hyprland/language",
-    "custom/separator",
     "custom/power"
   ],
   "hyprland/window": {
@@ -53,16 +45,22 @@
     "tooltip": false
   },
   "clock": {
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format-alt": "{:%d %m %Y}"
+    "tooltip-format": "<tt>{calendar}</tt>",
+    "format-alt": "{:%a, %d %m %Y}",
+    "calendar": {
+      "mode": "month",
+      "format": {
+        "months": "<span color='#e0def4'><b>{}</b></span>",
+        "days": "<span color='#908caa'>{}</span>",
+        "weekdays": "<span color='#e0def4'><b>{}</b></span>",
+        "today": "<span color='#ffffff'><b>{}</b></span>"
+      }
+    }
   },
   "cpu": {
     "format": "{usage}%",
     "tooltip": false,
     "interval": 3
-  },
-  "memory": {
-    "format": "{}%  "
   },
   "temperature": {
     "format": "{icon} {temperatureC}°C",
@@ -81,11 +79,9 @@
     "interface": "wl*",
     "format": "{ifname}",
     "format-wifi": "  {essid}",
-    "format-ethernet": " ",
     "format-disconnected": "Not connected",
     "tooltip-format": "  {ifname} via {gwaddr}",
     "tooltip-format-wifi": "   {essid} ({signalStrength}%)",
-    "tooltip-format-ethernet": "  {ifname} ({ipaddr}/{cidr})",
     "tooltip-format-disconnected": "Disconnected",
     "max-length": 50,
     "interval": 10,
@@ -144,17 +140,13 @@
     "format": "\uf011",
     "tooltip": true,
     "tooltip-format": "Power menu",
-    "on-click": "~/.dotfiles/.config/waybar/scripts/power-menu.sh"
+    "on-click": "~/.config/waybar/scripts/power-menu.sh"
   },
   "custom/vpn": {
-    "exec": "~/.dotfiles/.config/waybar/scripts/vpn-status.sh",
+    "exec": "~/.config/waybar/scripts/vpn-status.sh",
     "restart-interval": 5,
     "return-type": "json",
     "format": "{}",
     "tooltip": true
-  },
-  "custom/separator": {
-    "format": "│",
-    "tooltip": false
   }
 }

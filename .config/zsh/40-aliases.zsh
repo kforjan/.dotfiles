@@ -16,12 +16,11 @@ fi
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias mkdir='mkdir -p'
 alias df='df -h'
 alias free='free -h'
 alias ip='ip -color=auto'
 
-alias fg='dart run build_runner build --delete-conflicting-outputs'
-alias fgw='dart run build_runner watch --delete-conflicting-outputs'
+alias fgen='dart run build_runner build --delete-conflicting-outputs'
+alias fgenw='dart run build_runner watch --delete-conflicting-outputs'
 
-studio() { command studio "$@" &>/dev/null & disown }
+studio() { command studio "$@" &>/dev/null &! }

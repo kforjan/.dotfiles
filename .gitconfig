@@ -3,7 +3,7 @@
 	email = kresmirforjan5@gmail.com
 
 [init]
-	defaultBranch = master
+	defaultBranch = main
 
 [core]
 	pager = delta
