@@ -1,7 +1,6 @@
 bindkey '^f' autosuggest-accept
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
-bindkey '^r' fzf-history-widget
 bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
 bindkey '^w' backward-kill-word
@@ -12,7 +11,7 @@ autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd 'v' edit-command-line
 
-_sudo-command-line() {
+sudo-command-line() {
   [[ -z $BUFFER ]] && zle up-history
   if [[ $BUFFER == sudo\ * ]]; then
     LBUFFER="${LBUFFER#sudo }"
@@ -20,5 +19,5 @@ _sudo-command-line() {
     LBUFFER="sudo $LBUFFER"
   fi
 }
-zle -N _sudo-command-line
-bindkey '\e\e' _sudo-command-line
+zle -N sudo-command-line
+bindkey '^x^s' sudo-command-line

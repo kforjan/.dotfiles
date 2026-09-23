@@ -26,7 +26,7 @@ with the `arch` branch; `git submodule update --init` if you cloned without `--r
 | `.config/nvim` | neovim (submodule) |
 | `.config/aerospace` | tiling window manager |
 | `.config/alacritty` | legacy terminal, superseded by ghostty |
-| `.local/scripts` | `zsh-plugins`, `switch-to-arch` |
+| `.local/scripts` | `switch-to-arch` |
 | `.inputrc` | readline vi mode |
 
 ## Requirements
@@ -68,30 +68,21 @@ dependency) which would otherwise win for every non-interactive shell, so
 `node` in a terminal and `node` in a Makefile would be different versions.
 `nvm` itself stays lazy — first call sources the script.
 
-### zsh plugins
+### zsh and tmux plugins
 
 ```sh
-~/.local/scripts/zsh-plugins
+mkdir -p ~/.local/share/zsh/plugins
+for r in romkatv/powerlevel10k zsh-users/zsh-autosuggestions \
+         zsh-users/zsh-syntax-highlighting zsh-users/zsh-completions Aloxaf/fzf-tab; do
+  git clone --depth=1 https://github.com/$r ~/.local/share/zsh/plugins/${r##*/}
+done
+
+git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm  # then prefix + I
 ```
 
-Clones powerlevel10k, zsh-autosuggestions, zsh-syntax-highlighting,
-zsh-completions and fzf-tab into `~/.local/share/zsh/plugins/`, or pulls them
-if already present. Idempotent, so it is both the bootstrap and the updater.
-
-To add a plugin: clone it next to the others, then add one `source` line to
+To add a zsh plugin: clone it next to the others, then add one `source` line to
 `.config/zsh/20-plugins.zsh` (or `10-completion.zsh` if it ships completions,
 which must be on fpath before compinit).
-
-### tmux plugins
-
-tpm lives at `~/.config/tmux/plugins/tpm`. `tmux.conf` still falls back to
-`~/.tmux/plugins/tpm` for a fresh machine where tpm gets cloned there instead.
-`tmux-resurrect` and `tmux-continuum` are declared but not yet cloned, so
-`@continuum-restore` does nothing until:
-
-```sh
-tmux   # then: prefix + I
-```
 
 ### switch-to-arch
 

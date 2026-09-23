@@ -16,11 +16,10 @@ fi
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias mkdir='mkdir -p'
 alias df='df -h'
 
-alias fg='dart run build_runner build --delete-conflicting-outputs'
-alias fgw='dart run build_runner watch --delete-conflicting-outputs'
+alias fgen='dart run build_runner build --delete-conflicting-outputs'
+alias fgenw='dart run build_runner watch --delete-conflicting-outputs'
 
 # macOS niceties
 alias showfiles='defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder'
