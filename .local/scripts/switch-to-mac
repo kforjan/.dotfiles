@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Bound to F18, which the Adv360 `to_mac` macro sends right before it
+# switches itself to BT profile 1.
+
+# No `set -e`: if the mouse is asleep or already gone, still switch the monitor.
+set -u
+
+solaar config "MX Vertical" change-host 1
+ddcutil --noverify setvcp 60 0x13
