@@ -75,6 +75,8 @@ cmd-shift-i = 'move-workspace-to-monitor --wrap-around next'
 
 cmd-shift-semicolon = 'mode service'
 
+f18 = 'exec-and-forget ~/.local/scripts/switch-to-arch'
+
 [mode.service.binding]
 esc = ['reload-config', 'mode main']
 r = ['flatten-workspace-tree', 'mode main'] 

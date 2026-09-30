@@ -26,7 +26,7 @@ with the `arch` branch; `git submodule update --init` if you cloned without `--r
 | `.config/nvim` | neovim (submodule) |
 | `.config/aerospace` | tiling window manager |
 | `.config/alacritty` | legacy terminal, superseded by ghostty |
-| `.local/scripts` | `zsh-plugins` |
+| `.local/scripts` | `zsh-plugins`, `switch-to-arch` |
 | `.inputrc` | readline vi mode |
 
 ## Requirements
@@ -92,6 +92,19 @@ tpm lives at `~/.config/tmux/plugins/tpm`. `tmux.conf` still falls back to
 ```sh
 tmux   # then: prefix + I
 ```
+
+### switch-to-arch
+
+The Adv360's hotkey "2" taps F18 and then moves the keyboard to BT profile 3.
+aerospace binds F18 to `~/.local/scripts/switch-to-arch`, which moves the
+MX Vertical to channel 3 and the BenQ to DisplayPort. The arch branch has the
+mirror image (`switch-to-mac`) and the firmware fork as a submodule.
+
+- `m1ddc` is in the Brewfile. `hidapitester` is not in Homebrew: put the
+  release binary from todbot/hidapitester at `~/.local/bin/hidapitester`.
+- After a firmware change that alters the keyboard's HID descriptor, macOS
+  keeps the old one until the keyboard is forgotten and re-paired. Symptom:
+  "2" switches only the keyboard.
 
 ### optional
 

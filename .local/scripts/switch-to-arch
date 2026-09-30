@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Bound to F18 in aerospace.toml, which the Adv360 `to_arch` macro sends right
+# before it switches itself to BT profile 3.
+
+# No `set -e`: if the mouse is asleep or already gone, still switch the monitor.
+set -u
+
+# HID++ CHANGE_HOST: 0x0C is this MX Vertical's feature index for it (solaar
+# lists it as 12), 0x1B is setCurrentHost, 0x02 is 0-based host index = channel 3.
+# Absolute paths: aerospace runs this with the GUI login PATH, which has neither
+# Homebrew nor ~/.local/bin on it.
+"$HOME/.local/bin/hidapitester" --vidpid 046D:B020 --usagePage 0xFF43 --usage 0x0202 \
+  --open --length 20 --send-output 0x11,0xFF,0x0C,0x1B,0x02
+/opt/homebrew/bin/m1ddc display 1 set input 15

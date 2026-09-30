@@ -65,6 +65,8 @@ brew "imagemagick"
 brew "lua"
 # Package manager for the Lua programming language
 brew "luarocks"
+# Control external displays (USB-C/DisplayPort Alt Mode) using DDC/CI on Apple Silicon Macs
+brew "m1ddc"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # OpenBSD freely-licensed SSH connectivity tools
